@@ -37,15 +37,15 @@ pipeline {
         // Ensures Jenkins can read/write the local Terraform state
         // directory. This resolves "permission denied" errors on
         // terraform.tfstate.d/<env>/terraform.tfstate.backup
-        stage('Fix Permissions') {
-            steps {
-                sh """
-                   sudo mkdir -p terraform.tfstate.d/${params.ENVIRONMENT}
-                   sudo chmod -R 777 terraform.tfstate.d/
-                    echo "✅ State directory permissions fixed"
-                """
-            }
-        }
+       stage('Fix Permissions') {
+    steps {
+        sh """
+            mkdir -p terraform.tfstate.d/${params.ENVIRONMENT}
+            chmod -R 777 terraform.tfstate.d/
+            echo "✅ State directory permissions fixed"
+        """
+    }
+}
 
         // ── Terraform Init ────────────────────────────────────
         stage('Terraform Init') {
